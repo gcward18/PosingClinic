@@ -1,4 +1,4 @@
 .gitignore
-./backend/uploads
 .vscode
-./backend/llama-venv
+backend/llama-venv
+backend/uploads
