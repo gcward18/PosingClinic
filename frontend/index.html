@@ -354,16 +354,33 @@
                 <h2 class="text-2xl mb-6">Upload Your Content</h2>
                 <div class="grid md:grid-cols-2 gap-8">
                     <div class="border-2 border-dashed border-neutral-300 rounded-lg p-8 text-center">
-                    <i class="fa-solid fa-image text-4xl text-neutral-400 mb-4"></i>
-                    <h3 class="text-lg mb-2">Upload Photos</h3>
-                    <p class="text-neutral-500 mb-4">Drop your photos here or click to browse</p>
-                    <button class="bg-neutral-900 text-white px-6 py-2 rounded-lg">Select Photos</button>
+                        <div id="photo-upload-location" style="height: 150px;padding-bottom: 10px" class="relative" style="padding-bottom: 10px;">
+                            <div style="display:none;position:relative;height:100%" id="photo-preview-container" class="flex  inset-0 bg-neutral-200 items-center justify-center rounded-lg">
+                                <img src="#" id="photo-preview" class="inset-0 items-center h-full object-cover rounded-lg" />
+                            </div>
+                            <div id="upload-photo-default">
+                                <i class="fa-solid fa-image text-4xl text-neutral-400 mb-4"></i>
+                                <h3 class="text-lg mb-2">Upload Photos</h3>
+                                <p class="text-neutral-500 mb-4">Drop your photos here or click to browse</p>
+                            </div>
+                        </div>
+                        <input type="file" accept="image/*" multiple class="hidden" id="photo-upload-file-input" style="padding-top: 10px;" />
+                        <button class="bg-neutral-900 text-white px-6 py-2 rounded-lg" id="photo-upload-button">Select Photos</button>
                     </div>
+                        
                     <div class="border-2 border-dashed border-neutral-300 rounded-lg p-8 text-center">
-                    <i class="fa-solid fa-video text-4xl text-neutral-400 mb-4"></i>
-                    <h3 class="text-lg mb-2">Upload Videos</h3>
-                    <p class="text-neutral-500 mb-4">Drop your videos here or click to browse</p>
-                    <button class="bg-neutral-900 text-white px-6 py-2 rounded-lg">Select Videos</button>
+                        <div id="video-upload-location" style="height: 150px;padding-bottom: 10px" class="relative">
+                            <div style="display:none;position:relative;height:100%" id="video-preview-container" class="flex  inset-0 bg-neutral-200 items-center justify-center rounded-lg">
+                                <video src="#" id="video-preview" class="inset-0 items-center h-full object-cover rounded-lg" style="padding-bottom:10px" controls/>
+                            </div>
+                            <div id="upload-video-default">
+                                <i class="fa-solid fa-video text-4xl text-neutral-400 mb-4"></i>
+                                <h3 class="text-lg mb-2">Upload Videos</h3>
+                                <p class="text-neutral-500 mb-4">Drop your videos here or click to browse</p>
+                            </div>
+                        </div>
+                        <input type="file" accept="video/*" multiple class="hidden" id="video-upload-file-input" />
+                        <button class="bg-neutral-900 text-white px-6 py-2 rounded-lg" id="video-upload-button">Select Videos</button>
                     </div>
                 </div>
                 </section>
@@ -583,4 +600,5 @@
             </nav>
         </div>
     </body>
+    <script src="./script.js"></script>
 </html>
