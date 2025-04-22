@@ -28,13 +28,6 @@ def upload_file():
     
     if file.filename == '':
         return jsonify({"error": "No selected file"}), 400
-        
-    # if file:
-    #     filename = file.filename
-    #     thread = threading.Thread(target=process_file, args=(file.read(), filename,))
-    #     thread.start()
-    #     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-    #     return jsonify({"filename": filename}), 200
 
     if file:
         encoded_image = base64.b64encode(file.read()).decode("utf-8")
