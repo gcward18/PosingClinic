@@ -1,62 +1,49 @@
+
 import React from 'react';
 import { useFeedbackContext } from '../contexts/FeedbackContext';
 import dedent from 'dedent';
 
+/// <reference types="vite/client" />
+
+interface ImportMetaEnv {
+    readonly VITE_API_URL: string
+}
+
+interface ImportMeta {
+    readonly env: ImportMetaEnv
+}
+
+
 const UploadPhoto: React.FC = () => {
     const { setImageUrl, setFeedback } = useFeedbackContext();
 
-    const handlePhotoUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0];
-        if (!file) return;
-        
-        // Create a URL for the file and set the preview image for the feedback
-        const previewUrl = URL.createObjectURL(file)
-        setImageUrl(previewUrl);
-
-        const formData = new FormData();
-        formData.append('file', file);
-        
-        // Set the default response for the feedback this is for testing purposes
-        // In a real application, you would send the formData to the server for processing
-        // and get the response back to set the feedback
-        // For now, we will just set a default response
-        const defaultResponse = `The image shows a bodybuilder performing a side double biceps pose, which is a classic pose used in bodybuilding competitions to showcase muscular development.
-
-            **Strengths:**
-
-            * The bodybuilder's back and arm muscles are well-developed, with visible striations and definition.
-            * His latissimus dorsi muscles are wide and symmetrical, which is a key aspect of a well-developed back.
-            * His biceps are also well-developed, with a clear peak and separation from the surrounding muscles.
-
-            **Weaknesses:**
-
-            * The bodybuilder's legs appear to be slightly bent, which can detract from the overall symmetry and aesthetics of the pose. In a side double biceps pose, the legs are typically straight or slightly bent at the knee, with the feet shoulder-width apart.
-            * The bodybuilder's core muscles do not appear to be as well-developed as his upper body, which could be a weakness in his overall physique.
-            * The pose could benefit from a more dramatic shoulder roll, which would help to accentuate the development of his upper back and shoulders. 
-            * The bodybuilder's right arm appears to be slightly lower than his left arm, which can make the pose appear less symmetrical. 
-
-            Overall, the bodybuilder has a well-developed upper body, but may need to work on his lower body and core muscles to achieve greater overall symmetry and balance.`
-
+    const handlePhotoUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
         try {
-            // Upload the file to the server
-            setFeedback(dedent(defaultResponse));
-
-            // fetch('http://127.0.0.1:5000/upload', {
-            //     method: 'POST',
-            //     body: formData,
-            // })
-            // .then(response => response.json())
-            // .then(data => {
-            //     console.log('File uploaded successfully:', data.response);
-            //     setFeedback(data.response);
-            // })
-            // .catch(error => {
-            //     setFeedback("Error uploading file");
-            //     console.error('Error uploading file:', error);
-            // });
-        } 
-        catch (error) {
-            console.error("Error uploading file:", error);
+            const file = event.target.files?.[0];
+            if (!file) return;
+            
+            // Create a URL for the file and set the preview image for the feedback
+            const previewUrl = URL.createObjectURL(file)
+            setImageUrl(previewUrl);
+    
+            const formData = new FormData();
+            formData.append('file', file);
+    
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/upload`, {
+                method: 'POST',
+                body: formData,
+            });
+    
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+    
+            const data = await response.json();
+            console.log('File uploaded successfully:', data.response);
+            setFeedback(data.response);
+        } catch (error) {
+            console.error('Error uploading file:', error);
+            setFeedback('Error uploading file');
         }
     };
 

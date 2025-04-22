@@ -11,3 +11,6 @@ posing-clinic-frontend/.vscode
 posing-clinic-frontend/.DS_Store
 posing-clinic-frontend/.idea
 posing-clinic-frontend/package-lock.json
+
+.env
+*.sh   

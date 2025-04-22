@@ -1,36 +1,37 @@
-from flask import Flask, request, send_from_directory, jsonify
+from fastapi import FastAPI, File, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 import os
-from flask_cors import CORS
-from flask_socketio import SocketIO
-from json import loads as json_loads, dumps as json_dumps
 from groq import Groq
 import base64
 from dotenv import load_dotenv
+
 load_dotenv()
 
-app = Flask(__name__)
-CORS(app)
+app = FastAPI()
 
+# CORS middleware configuration
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Initialize Groq client
 client = Groq(
     api_key=os.environ.get("GROQ_API_KEY"),
 )
-socketio = SocketIO(app, cors_allowed_origins="*")
 
 UPLOAD_FOLDER = 'uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-@app.route('/upload', methods=['POST'])
-def upload_file():
-    if 'file' not in request.files:
-        return jsonify({"error": "No file part"}), 400
-    file = request.files.get('file')
-    
-    if file.filename == '':
-        return jsonify({"error": "No selected file"}), 400
-
-    if file:
-        encoded_image = base64.b64encode(file.read()).decode("utf-8")
+@app.post("/upload")
+async def upload_file(file: UploadFile = File(...)):
+    try:
+        file_content = await file.read()
+        encoded_image = base64.b64encode(file_content).decode("utf-8")
         
         messages = [
             {
@@ -57,10 +58,14 @@ def upload_file():
             stop=None,
         )
         
-        # Extract the content from the message
         response_content = completion.choices[0].message.content
+        return JSONResponse(content={"response": response_content})
         
-        return jsonify({"response": response_content}), 200
+    except Exception as e:
+        return JSONResponse(
+            status_code=500,
+            content={"error": str(e)}
+        )
     
 # def process_file(file_bytes, filename):
 #     socketio.emit('file_received', {'data': filename})
@@ -98,9 +103,9 @@ def upload_file():
 # def handle_disconnect():
 #     print('Client disconnected')
 
-@app.route('/uploads/<filename>', methods=['GET'])
-def uploaded_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+# @app.route('/uploads/<filename>', methods=['GET'])
+# def uploaded_file(filename):
+#     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 if __name__ == '__main__':
     # socketio.run(app, debug=True, port=5000)
