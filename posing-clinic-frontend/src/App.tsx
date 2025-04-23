@@ -2,8 +2,7 @@ import React from 'react';
 import UploadSection from './components/UploadSection';
 import Feedback from './components/Feedback';
 import { ImageProvider } from './components/contexts/FeedbackContext';
-// import CritiqueOptions from './components/CritiqueOptions';
-// import RecentCritiques from './components/RecentCritiques';
+import RecentCritiques from './components/RecentCritiques';
 
 const App: React.FC = () => {
   return (
@@ -12,10 +11,8 @@ const App: React.FC = () => {
         <ImageProvider>
           <Feedback />
           <UploadSection />
+          <RecentCritiques />
         </ImageProvider>
-{/*         
-        <CritiqueOptions />
-        <RecentCritiques /> */}
       </main>
     </div>
   );

@@ -1,9 +1,14 @@
 from fastapi import FastAPI
 import os
-from .middleware import setup_middlewares
-from .routers import evaluations
+from app.middleware import setup_middlewares
+from app.routers import evaluations
+from app.database import engine
+from app.models import Base
 
 app = FastAPI()
+
+# Create database tables
+Base.metadata.create_all(bind=engine)
 
 # Setup middleware
 setup_middlewares(app)

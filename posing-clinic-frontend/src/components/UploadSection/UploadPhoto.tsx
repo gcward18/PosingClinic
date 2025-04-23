@@ -2,7 +2,6 @@
 import React from 'react';
 import { useFeedbackContext } from '../contexts/FeedbackContext';
 
-
 const UploadPhoto: React.FC = () => {
     const { setImageUrl, setFeedback } = useFeedbackContext();
 
@@ -18,7 +17,7 @@ const UploadPhoto: React.FC = () => {
             const formData = new FormData();
             formData.append('file', file);
     
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/upload`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/evaluations/upload`, {
                 method: 'POST',
                 body: formData,
             });
@@ -39,15 +38,6 @@ const UploadPhoto: React.FC = () => {
     return (
         <div className=" rounded-lg p-8 text-center">
             <div id="photo-upload-location" className="relative">
-                
-                {/* <div id="upload-photo-default" className="flex flex-col items-center justify-center  rounded-lg p-6 hover:border-neutral-400 cursor-pointer transition">
-                    <FaImage className="text-4xl text-neutral-400 mb-4" />
-                    <h3 className="text-lg mb-2">Upload Photo</h3>
-                    <p className="text-neutral-500 mb-4 text-center">
-                        Drop your photos here or click to browse
-                    </p>
-                </div> */}
-
                 <input
                     type="file"
                     accept="image/*"

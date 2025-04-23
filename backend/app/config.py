@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     POSTGRES_USER: str = os.environ.get('POSTGRES_USER', 'admin')
     POSTGRES_PASSWORD: str = os.environ.get('POSTGRES_PASSWORD', 'secret')
     POSTGRES_DB: str = os.environ.get('POSTGRES_DB', 'mydb')
-    database_url: str = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@postgres-dev:5432/{POSTGRES_DB}"
+    database_url: str = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@localhost:5432/{POSTGRES_DB}"
     MINIO_ROOT_USER: str = os.environ.get('MINIO_ROOT_USER', 'minioadmin')
     MINIO_ROOT_PASSWORD: str = os.environ.get('MINIO_ROOT_PASSWORD', 'minioadmin')
     MINIO_ENDPOINT: str = os.environ.get('MINIO_ENDPOINT', 'minio:9000')

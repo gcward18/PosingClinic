@@ -26,13 +26,13 @@ const Feedback: React.FC = () => {
                                     <ReactMarkdown>{feedback}</ReactMarkdown>
                                 </div>
                             ) : (
-                                <p className="mt-2 text-sm ">
+                                <div className="mt-2 text-sm ">
                                 {loading ? (<p>"Processing Feedback...."</p>) : (
                                     <p className="text-neutral-500 mb-4 text-center">
                                         Select a photo and have your feedback generated
                                     </p>
                                 )}
-                                </p>
+                                </div>
                             )
                         }
                 </div>
