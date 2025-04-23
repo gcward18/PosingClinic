@@ -1,17 +1,6 @@
 
 import React from 'react';
 import { useFeedbackContext } from '../contexts/FeedbackContext';
-import dedent from 'dedent';
-
-/// <reference types="vite/client" />
-
-interface ImportMetaEnv {
-    readonly VITE_API_URL: string
-}
-
-interface ImportMeta {
-    readonly env: ImportMetaEnv
-}
 
 
 const UploadPhoto: React.FC = () => {
