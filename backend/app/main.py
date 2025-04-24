@@ -1,3 +1,7 @@
+import debugpy
+debugpy.listen(('0.0.0.0', 5678))
+# debugpy.wait_for_client()  # Uncomment this line if you want the application to wait for a debugger to attach
+
 from fastapi import FastAPI
 import os
 from app.middleware import setup_middlewares

@@ -4,6 +4,7 @@ bidict==0.23.1
 blinker==1.9.0
 certifi==2025.1.31
 click==8.1.8
+debugpy
 distro==1.9.0
 dotenv==0.9.9
 Flask==3.1.0
@@ -16,7 +17,8 @@ httpx==0.28.1
 idna==3.10
 itsdangerous==2.2.0
 Jinja2==3.1.6
-MarkupSafe==3.0.2
+MarkupSafe==3.0.
+pillow==11.2.1
 pydantic==2.11.3
 pydantic_core==2.33.1
 pydantic-settings>=2.0.0

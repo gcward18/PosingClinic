@@ -58,7 +58,8 @@ const RecentCritiques: React.FC = () => {
                                 <img 
                                     src={imageUrl}
                                     alt="Pose critique" 
-                                    className="w-full h-full object-cover"
+                                    className="w-full h-full object-cover [object-position:center_25%]"
+                                    loading='lazy'
                                 />
                             </div>
                             <div className="p-4">
