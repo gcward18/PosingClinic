@@ -26,9 +26,9 @@ fi
 
 # Build and start containers
 echo "🏗️  Building and starting containers..."
-docker-compose down -v # Clean up any existing containers
-docker-compose build --no-cache
-docker-compose up -d
+docker compose down -v # Clean up any existing containers
+docker compose build --no-cache
+docker compose up -d
 
 # Wait for services to be ready
 echo "⏳ Waiting for services to start..."

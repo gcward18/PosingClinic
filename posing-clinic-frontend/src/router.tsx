@@ -1,21 +1,17 @@
-import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoginPage from './pages/loginpage';
 import RegisterPage from './pages/registerpage';
-import HomePage from './pages/homepage';
-import ProtectedRoute from './components/guards/ProtectedRoute';
+import React from 'react';
+import App from './App';
 
-
-const App: React.FC = () => {
+export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/home" element={<ProtectedRoute><HomePage /></ProtectedRoute>} />
+        <Route path="/" element={<App />} />
       </Routes>
     </BrowserRouter>
   );
-};
-
-export default App;
+}
