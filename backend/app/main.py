@@ -5,9 +5,9 @@ debugpy.listen(('0.0.0.0', 5678))
 from fastapi import FastAPI
 import os
 from app.middleware import setup_middlewares
-from app.routers import evaluations
+from app.routers import evaluations, auth
 from app.database import engine
-from app.models import Base
+from app.models.models import Base
 
 app = FastAPI()
 
@@ -19,6 +19,7 @@ setup_middlewares(app)
 
 # Include routers
 app.include_router(evaluations.router)
+app.include_router(auth.router)
 
 UPLOAD_FOLDER = 'uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)

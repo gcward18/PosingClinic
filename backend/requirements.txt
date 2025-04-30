@@ -37,3 +37,4 @@ uvicorn>=0.15.0
 python-multipart
 sqlalchemy
 psycopg2-binary
+passlib==1.7.4

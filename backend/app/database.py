@@ -1,11 +1,16 @@
+from fastapi import HTTPException
+from fastapi.params import Depends
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from app.models.models import UserSession, User, engine
 from minio import Minio
 from app.config import settings
+from fastapi.security import HTTPBasic, HTTPBasicCredentials
 
 # Database configuration
 engine = create_engine(settings.database_url)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+security = HTTPBasic()
 
 # MinIO client configuration
 minio_client = Minio(
@@ -29,3 +34,22 @@ def get_db():
         yield db
     finally:
         db.close()
+
+def authenticate_user(credentials: HTTPBasicCredentials, db: UserSession = Depends(get_db)):
+    """
+    Function to authenticate user using HTTP Basic Authentication.
+    """
+    user = db.query(User).filter(User.username == credentials.username).first()
+    if user is None or not user.verify_password(credentials.password):
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid username or password",
+            headers={"WWW-Authenticate": "Basic"},
+        )
+    return user
+
+def get_current_user(user: User = Depends(authenticate_user)):
+    """
+    Function to get the current authenticated user.
+    """
+    return user
