@@ -1,0 +1,45 @@
+from sqlalchemy import Column, ForeignKey, Integer, String, DateTime, Text, create_engine
+from sqlalchemy.orm import relationship
+from sqlalchemy.ext.declarative import declarative_base
+from datetime import datetime
+from passlib.hash import bcrypt
+from app.config import settings
+
+Base = declarative_base()
+engine = create_engine(settings.database_url)
+
+class Evaluation(Base):
+    __tablename__ = "evaluations"
+
+    id = Column(Integer, primary_key=True, index=True)
+    image_path = Column(String, nullable=False)
+    feedback = Column(Text, nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+
+class UserSession(Base):
+    __tablename__ = "user_sessions"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    expires_at = Column(DateTime, nullable=False)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    user = relationship("User", back_populates="sessions")
+
+class User(Base):
+    __tablename__ = "users"
+
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String, unique=True, index=True)
+    email = Column(String, unique=True, index=True)
+    password_hash = Column(String)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    sessions = relationship("UserSession", back_populates="user", cascade="all, delete-orphan")
+    
+    def verify_password(self, password: str):
+        return bcrypt.verify(password, self.password_hash)
+    
+    @staticmethod
+    def hash_password(password: str) -> str:
+        return bcrypt.hash(password)
+
+Base.metadata.create_all(bind=engine)

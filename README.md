@@ -76,6 +76,13 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
+#### Access Swagger docs 
+
+To access the swagger docs and experiment with the endpoints go to the following url after running the backend service
+```
+http://localhost:8000/docs
+```
+
 ## 💡 Features
 
 - Upload photos for pose analysis

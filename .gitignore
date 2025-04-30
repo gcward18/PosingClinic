@@ -13,3 +13,4 @@ posing-clinic-frontend/.idea
 posing-clinic-frontend/package-lock.json
 
 .env
+.idea

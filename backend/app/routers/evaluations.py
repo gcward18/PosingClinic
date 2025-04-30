@@ -8,7 +8,7 @@ from datetime import datetime
 from sqlalchemy.orm import Session
 from app.clients.llm import client
 from app.database import get_db, minio_client, BUCKET_NAME
-from app.models import Evaluation
+from app.models.models import Evaluation
 import io
 from PIL import Image
 
