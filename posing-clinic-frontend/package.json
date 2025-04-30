@@ -22,7 +22,9 @@
     "react-icons": "^5.5.0",
     "react-markdown": "^10.1.0",
     "tailwindcss": "^4.1.4",
-    "zero-md": "^3.1.7"
+    "zero-md": "^3.1.7",
+    "react-router-dom": "^6.22.0",
+    "@types/react-router-dom": "^5.3.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
