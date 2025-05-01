@@ -1,0 +1,142 @@
+[
+  {
+    "name": "2025 Los Angeles Grand Prix",
+    "date": "2025-04-26",
+    "judges": [],
+    "divisions": [
+      "Men's Bodybuilding",
+      "Men's Physique",
+      "Classic Physique",
+      "Women's Physique",
+      "Bikini",
+      "Figure",
+      "Wellness"
+    ]
+  },
+  {
+    "name": "2025 Republic of Texas Championships",
+    "date": "2025-07-12",
+    "judges": [],
+    "divisions": [
+      "Men's Bodybuilding",
+      "Men's Physique",
+      "Classic Physique",
+      "Women's Physique",
+      "Bikini",
+      "Figure",
+      "Wellness"
+    ]
+  },
+  {
+    "name": "2025 San Diego Championships",
+    "date": "2025-03-08",
+    "judges": [],
+    "divisions": [
+      "Men's Bodybuilding",
+      "Men's Physique",
+      "Classic Physique",
+      "Women's Physique",
+      "Bikini",
+      "Figure",
+      "Wellness"
+    ]
+  },
+  {
+    "name": "2025 Wasatch Warrior",
+    "date": "2025-04-26",
+    "judges": [],
+    "divisions": [
+      "Men's Bodybuilding",
+      "Men's Physique",
+      "Classic Physique",
+      "Women's Physique",
+      "Bikini",
+      "Figure",
+      "Wellness"
+    ]
+  },
+  {
+    "name": "2025 NPC Junior Nationals",
+    "date": "2025-06-20",
+    "judges": [],
+    "divisions": [
+      "Men's Bodybuilding",
+      "Men's Physique",
+      "Classic Physique",
+      "Women's Physique",
+      "Bikini",
+      "Figure",
+      "Wellness"
+    ]
+  },
+  {
+    "name": "2025 NPC Mid Atlantic Cup",
+    "date": "2025-05-03",
+    "judges": [],
+    "divisions": [
+      "Men's Bodybuilding",
+      "Men's Physique",
+      "Classic Physique",
+      "Women's Physique",
+      "Bikini",
+      "Figure",
+      "Wellness"
+    ]
+  },
+  {
+    "name": "2025 Pittsburgh Power & Fitness Festival",
+    "date": "2025-05-10",
+    "judges": ["Jim Manion"],
+    "divisions": [
+      "Men's Bodybuilding",
+      "Men's Physique",
+      "Classic Physique",
+      "Women's Physique",
+      "Bikini",
+      "Figure",
+      "Wellness"
+    ]
+  },
+  {
+    "name": "2025 New York Pro",
+    "date": "2025-05-17",
+    "judges": ["Steve Weinberger"],
+    "divisions": [
+      "Men's Bodybuilding",
+      "Men's Physique",
+      "Classic Physique",
+      "Women's Physique",
+      "Bikini",
+      "Figure",
+      "Wellness"
+    ]
+  },
+  {
+    "name": "2025 California State Pro",
+    "date": "2025-05-24",
+    "judges": ["Tamer El Guindy"],
+    "divisions": [
+      "Men's Bodybuilding",
+      "Men's Physique",
+      "Classic Physique",
+      "Women's Physique",
+      "Bikini",
+      "Figure",
+      "Wellness"
+    ]
+  },
+  {
+    "name": "2025 Musclecontest Ireland Pro Qualifier",
+    "date": "2025-05-17",
+    "judges": [],
+    "divisions": [
+      "Men's Bodybuilding",
+      "Men's Physique",
+      "Classic Physique",
+      "Women's Physique",
+      "Bikini",
+      "Figure",
+      "Wellness"
+    ]
+  }
+]
