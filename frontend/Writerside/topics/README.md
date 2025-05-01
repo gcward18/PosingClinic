@@ -12,19 +12,19 @@ This is the frontend component of the posing clinic application (desktop focused
 
 First, clone the repository from GitHub:
 
-```sh
+```
 git clone \<your GitHub project link\>
 ```
 
 Then navigate into the new project's directory:
 
-```sh
+```
 cd \<your project directory\>
 ```
 
 Then install the necessary packages:
 
-```sh
+```
 pip install -r requirements.txt
 ```
 

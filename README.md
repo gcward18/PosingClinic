@@ -62,7 +62,7 @@ To stop the application:
 
 #### Frontend
 ```bash
-cd posing-clinic-frontend
+cd frontend
 npm install
 npm run dev
 ```

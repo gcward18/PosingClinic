@@ -2,7 +2,7 @@ from fastapi import HTTPException
 from fastapi.params import Depends
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from app.models.models import UserSession, User, engine
+from app.models.models import User
 from minio import Minio
 from app.config import settings
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
@@ -35,7 +35,7 @@ def get_db():
     finally:
         db.close()
 
-def authenticate_user(credentials: HTTPBasicCredentials, db: UserSession = Depends(get_db)):
+def authenticate_user(credentials: HTTPBasicCredentials, db = Depends(get_db)):
     """
     Function to authenticate user using HTTP Basic Authentication.
     """

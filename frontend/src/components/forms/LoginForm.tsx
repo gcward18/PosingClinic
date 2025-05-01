@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import React from 'react';
 import { loginUser } from '../../apis/auth'; // Adjust the import path as necessary
 
 export default function LoginForm() {  
     const [password, setPassword] = useState('');
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
 
+    // @ts-ignore
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const response = await loginUser({ email, password });
-            if (response?.message === "Login successful") {
-                alert('Login successful!');
+            const response = await loginUser({ username, password });
+            if (response?.access_token) {
                 window.location.href = '/home'; // Redirect to the home page
             } else {
                 alert('Invalid credentials. Please try again.');
@@ -26,12 +27,12 @@ export default function LoginForm() {
                 <h2 className="text-2xl font-bold mb-4">Login</h2>
                 <form onSubmit={handleLogin}>
                     <div className="mb-4">
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+                        <label htmlFor="username" className="block text-sm font-medium text-gray-700">Username</label>
                         <input
-                            type="email"
-                            id="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            type="username"
+                            id="username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
                             required
                             className="mt-1 block w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-500 text-gray-700"
                         />

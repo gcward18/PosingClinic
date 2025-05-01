@@ -3,6 +3,7 @@
         SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
 
 <instance-profile id="pcfp"
-                 name="Posing Clinic Frontend Project">
+                 name="Posing Clinic Frontend Project" start-page="README.md">
 
+    <toc-element topic="README.md"/>
 </instance-profile>
