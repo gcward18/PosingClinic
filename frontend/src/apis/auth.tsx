@@ -14,28 +14,31 @@ export async function registerUser(data: { username: string, email: string, pass
     return result;
 }
 
-export async function loginUser(data: { email: string, password: string }) {
+export async function loginUser(data: { username: string, password: string }) {
+    const formData = new URLSearchParams();
+    formData.append('username', data.username);
+    formData.append('password', data.password);
+    // @ts-ignore
     const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: JSON.stringify(data),
+        body: formData.toString(),
     });
     if (!response.ok) {
         throw new Error('Network response was not ok');
     }
     const result = await response.json();
-    console.log(result);
-    console.log(result.session_id);
-    if (result.session_id) {
-        
-        localStorage.setItem('access_token', result.session_id);
+
+    if (result.access_token) {
+        localStorage.setItem('access_token', result.access_token);
     }
     return result;
 }
 
 export async function logoutUser() {
+    // @ts-ignore
     const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/logout`, {
         method: 'POST',
         headers: {
@@ -50,6 +53,7 @@ export async function logoutUser() {
 }
 
 export async function getUser() {
+    // @ts-ignore
     const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/current_user`, {
         method: 'GET',
         headers: {

@@ -47,7 +47,7 @@ services:
       - "5678:5678"  # For the debugger
     volumes:
       - ./backend:/app
-    command: python -X frozen_modules=off -m debugpy --listen 0.0.0.0:5678 --wait-for-client -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    command: python -X frozen_modules=off -m debugpy --listen 0.0.0.0:5678 -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
     depends_on:
       - postgres
       - minio
