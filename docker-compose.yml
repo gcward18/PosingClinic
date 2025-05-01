@@ -39,22 +39,28 @@ services:
       MINIO_ACCESS_KEY: ${MINIO_ROOT_USER}
       MINIO_SECRET_KEY: ${MINIO_ROOT_PASSWORD}
       GROQ_API_KEY: ${GROQ_API_KEY}
+      PYTHONPATH: /app
+      DEBUG: "True"
+      PYDEVD_DISABLE_FILE_VALIDATION: "1"
     ports:
       - "8000:8000"
       - "5678:5678"  # For the debugger
+    volumes:
+      - ./backend:/app
+    command: python -X frozen_modules=off -m debugpy --listen 0.0.0.0:5678 --wait-for-client -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
     depends_on:
       - postgres
       - minio
   
   frontend:
     build: 
-      context: ./posing-clinic-frontend
+      context: ./frontend
       dockerfile: Dockerfile
     container_name: frontend-dev
     ports:
       - "5173:5173"
     volumes:
-      - ./posing-clinic-frontend:/app
+      - ./frontend:/app
       - /app/node_modules
     environment:
       - NODE_ENV=development

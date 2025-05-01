@@ -1,5 +1,4 @@
-from sqlalchemy import Column, ForeignKey, Integer, String, DateTime, Text, create_engine
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, Integer, String, DateTime, Text, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
 from passlib.hash import bcrypt
@@ -17,14 +16,6 @@ class Evaluation(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
 
 
-class UserSession(Base):
-    __tablename__ = "user_sessions"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    expires_at = Column(DateTime, nullable=False)
-    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    user = relationship("User", back_populates="sessions")
-
 class User(Base):
     __tablename__ = "users"
 
@@ -33,13 +24,13 @@ class User(Base):
     email = Column(String, unique=True, index=True)
     password_hash = Column(String)
     created_at = Column(DateTime, default=datetime.utcnow)
-    sessions = relationship("UserSession", back_populates="user", cascade="all, delete-orphan")
-    
+
     def verify_password(self, password: str):
         return bcrypt.verify(password, self.password_hash)
     
     @staticmethod
     def hash_password(password: str) -> str:
         return bcrypt.hash(password)
+
 
 Base.metadata.create_all(bind=engine)

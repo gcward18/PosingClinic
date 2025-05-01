@@ -4,13 +4,15 @@ backend/uploads
 backend/.env
 backend/venv/*
 
-posing-clinic-frontend/.env
-posing-clinic-frontend/node_modules
-posing-clinic-frontend/build
-posing-clinic-frontend/.vscode
-posing-clinic-frontend/.DS_Store
-posing-clinic-frontend/.idea
-posing-clinic-frontend/package-lock.json
+frontend/.env
+frontend/node_modules
+frontend/build
+frontend/.vscode
+frontend/.DS_Store
+frontend/.idea
+frontend/package-lock.json
 
 .env
 .idea
+
+node_modules
