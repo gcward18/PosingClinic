@@ -1,6 +1,6 @@
-from app.models.models import Division
+from app.models.models import User
 from app.services.base_crud import CRUDBase
 
 
-class CRUDDivision(CRUDBase[Division]):
+class CRUDUser(CRUDBase[User]):
     pass

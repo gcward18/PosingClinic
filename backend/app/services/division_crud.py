@@ -1,6 +1,6 @@
-from app.models.models import Judge
+from app.models.models import Division
 from app.services.base_crud import CRUDBase
 
 
-class CRUDJudge(CRUDBase[Judge]):
+class CRUDDivision(CRUDBase[Division]):
     pass
