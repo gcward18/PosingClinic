@@ -1,16 +1,16 @@
 from pydantic import BaseModel
 
 
-class DivisionBase(BaseModel):
+class JudgeBase(BaseModel):
     name: int
     sex_allowed: str
 
 
-class DivisionCreate(DivisionBase):
+class JudgeCreate(JudgeBase):
     pass
 
 
-class DivisionResponse(DivisionBase):
+class JudgeResponse(JudgeBase):
     id: int
 
     class Config:

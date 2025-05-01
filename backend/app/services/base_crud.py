@@ -20,7 +20,8 @@ class CRUDBase(Generic[ModelType]):
         db.refresh(obj_in)
         return obj_in
 
-    def update(self, db: Session, db_obj: ModelType, obj_in: dict) -> ModelType:
+    def update(self, db: Session, id: int, obj_in: dict) -> ModelType:
+        db_obj = db.query(self.model).get(id)
         for attr, value in obj_in.items():
             if attr in db_obj.__table__.columns.keys():
                 setattr(db_obj, attr, value)
