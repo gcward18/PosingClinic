@@ -1,54 +1,52 @@
 from fastapi import APIRouter, HTTPException
-from sqlalchemy import and_
 from sqlalchemy.orm import Session
 from fastapi import Depends
 from app.database import get_db
-from app.models.models import Judge
-from app.schemas.judges_schema import JudgeResponse, JudgeCreate, JudgeUpdate
+from app.models.models import Division
+from app.schemas.division_schema import DivisionResponse, DivisionCreate, DivisionUpdate
+from starlette import status
+
+from backend.app.services.division_crud import CRUDDivision
 
 router = APIRouter(
-    prefix="/judges",
-    tags=["judges"],
+    prefix="/divisions",
+    tags=["divisions"],
     responses={404: {"description": "Not found"}},
     dependencies=[]
 )
 
+crud_divisions = CRUDDivision(Division)
 
-@router.get("/{judge_id}", response_model=JudgeResponse)
-async def get_judge(judge_id: int, db: Session = Depends(get_db)):
-    judge = db.query(Judge).filter(and_(Judge.id == judge_id)).first()
-    if judge is None:
-        raise HTTPException(status_code=404, detail="Judge not found")
-    return JudgeResponse.from_orm(judge)
-
-
-@router.post("/", response_model=JudgeResponse)
-async def post_judge(judge_body: JudgeCreate, db: Session = Depends(get_db)):
-    judge = Judge(**judge_body.dict())
-    db.add(judge)
-    db.commit()
-    db.refresh(judge)
-    return JudgeResponse.from_orm(judge)
+@router.get("/{division_id}", response_model=DivisionResponse)
+async def get_division(division_id: int, db: Session = Depends(get_db)):
+    division = crud_divisions.get(id=division_id, db=db)
+    if division is None:
+        raise HTTPException(status_code=404, detail="Division not found")
+    return DivisionResponse.from_orm(division)
 
 
-@router.put("/{judge_id}", response_model=JudgeResponse)
-async def update_judge(
-        judge_id: int,
-        judge_update: JudgeUpdate,
+@router.post("/", response_model=DivisionResponse)
+async def post_division(division_body: DivisionCreate, db: Session = Depends(get_db)):
+    division = crud_divisions.create(db, Division(**division_body.dict()))
+    return DivisionResponse.from_orm(division)
+
+
+@router.put("/{division_id}", response_model=DivisionResponse)
+async def update_division(
+        division_id: int,
+        division_update: DivisionUpdate,
         db: Session = Depends(get_db)
 ):
-    judge = db.query(Judge).filter(and_(
-        Judge.id == judge_id
-    )).first()
+    division = crud_divisions.update(db=db, id=division_id, obj_in=division_update.dict(exclude_unset=True))
 
-    if judge is None:
-        raise HTTPException(status_code=404, detail="Judge not found")
+    if division is None:
+        raise HTTPException(status_code=404, detail="Division not found")
+    return DivisionResponse.from_orm(division)
 
-    update_data = judge_update.dict(exclude_unset=True)
-    for field, value in update_data.items():
-        setattr(judge, field, value)
-
-    db.commit()
-    db.refresh(judge)
-
-    return JudgeResponse.from_orm(judge)
+@router.delete("/{division_id}")
+async def delete_division(id: int, db: Session = Depends(get_db)):
+    try:
+        crud_divisions.delete(db=db, id=id)
+        return status.HTTP_204_NO_CONTENT
+    except Exception as e:
+        raise HTTPException(status_code=404, detail="Division not found")

@@ -1,6 +1,6 @@
-from app.models.models import Competition
+from app.models.models import Competitor
 from app.services.base_crud import CRUDBase
 
 
-class CRUDCompetition(CRUDBase[Competition]):
+class CRUDCompetitor(CRUDBase[Competitor]):
     pass
