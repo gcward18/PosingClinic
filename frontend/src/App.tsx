@@ -12,6 +12,7 @@ import CompetitionAddPage from "./pages/competitions/CompetitionsAddPage";
 import UserAddPage from "./pages/users/UsersAddPage";
 import NotFoundPage from './pages/NotFoundPage';
 import FullCritique from './components/RecentCritiques/FullCritique';
+import JudgeListPage from "./pages/judges/JudgeListPage";
 
 const App: React.FC = () => {
   // @ts-ignore
@@ -25,6 +26,7 @@ const App: React.FC = () => {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/judge" element={<JudgeAddPage/>}/>
+                <Route path="/judges" element={<JudgeListPage/>}/>
                 <Route path="/division" element={<DivisionAddPage/>}/>
                 <Route path="/competitor" element={<CompetitorAddPage/>}/>
                 <Route path="/competition" element={<CompetitionAddPage/>}/>

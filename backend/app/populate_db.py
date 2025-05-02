@@ -35,6 +35,7 @@ def seedData(session: Session):
     for fp, model in paths:
         data = get_data(fp)
 
+        print(fp)
         for row in data:
             if 'divisions' in row:
                 del row['divisions']
@@ -58,4 +59,5 @@ def main():
 
 
 if __name__ == "__main__":
+    print('main called')
     main()

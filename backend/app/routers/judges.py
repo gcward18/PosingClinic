@@ -27,6 +27,14 @@ async def get_judge(judge_id: int, db: Session = Depends(get_db)):
     return JudgeResponse.from_orm(judge)
 
 
+@router.get("/", response_model=list[JudgeResponse])
+async def get_judges(db: Session = Depends(get_db)):
+    judge = crud_judges.get_all(db=db)
+    if judge is None:
+        raise HTTPException(status_code=404, detail="Judge not found")
+    return [JudgeResponse.from_orm(j) for j in judge]
+
+
 @router.post("/", response_model=JudgeResponse)
 async def post_judge(judge_body: JudgeCreate, db: Session = Depends(get_db)):
     judge = crud_judges.create(db, Judge(**judge_body.dict()))
