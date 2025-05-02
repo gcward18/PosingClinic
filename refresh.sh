@@ -1,3 +1,4 @@
 #!/bin/bash
 
-git update-index --refresh
+git rm --cached -r .
+git git restore --staged .
