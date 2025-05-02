@@ -2,54 +2,54 @@ from fastapi import APIRouter, HTTPException
 from sqlalchemy.orm import Session
 from fastapi import Depends
 from app.database import get_db
-from app.models.models import Competitor
-from app.schemas.competitor_schema import CompetitorResponse, CompetitorCreate, CompetitorUpdate
+from app.models.models import Judge
+from app.schemas.judges_schema import JudgeResponse, JudgeCreate, JudgeBase
 from starlette import status
 
-from backend.app.services.judge_crud import CRUDJudge
+from app.services.judge_crud import CRUDJudge
 
 router = APIRouter(
-    prefix="/competitors",
-    tags=["competitors"],
+    prefix="/judges",
+    tags=["judges"],
     responses={404: {"description": "Not found"}},
     dependencies=[]
 )
 
 
-crud_competitors = CRUDJudge(Competitor)
+crud_judges = CRUDJudge(Judge)
 
 
-@router.get("/{competitor_id}", response_model=CompetitorResponse)
-async def get_competitor(competitor_id: int, db: Session = Depends(get_db)):
-    competitor = crud_competitors.get(id=competitor_id, db=db)
-    if competitor is None:
-        raise HTTPException(status_code=404, detail="Competitor not found")
-    return CompetitorResponse.from_orm(competitor)
+@router.get("/{judge_id}", response_model=JudgeResponse)
+async def get_judge(judge_id: int, db: Session = Depends(get_db)):
+    judge = crud_judges.get(id=judge_id, db=db)
+    if judge is None:
+        raise HTTPException(status_code=404, detail="Judge not found")
+    return JudgeResponse.from_orm(judge)
 
 
-@router.post("/", response_model=CompetitorResponse)
-async def post_competitor(competitor_body: CompetitorCreate, db: Session = Depends(get_db)):
-    competitor = crud_competitors.create(db, Competitor(**competitor_body.dict()))
-    return CompetitorResponse.from_orm(competitor)
+@router.post("/", response_model=JudgeResponse)
+async def post_judge(judge_body: JudgeCreate, db: Session = Depends(get_db)):
+    judge = crud_judges.create(db, Judge(**judge_body.dict()))
+    return JudgeResponse.from_orm(judge)
 
 
-@router.put("/{competitor_id}", response_model=CompetitorResponse)
-async def update_competitor(
-        competitor_id: int,
-        competitor_update: CompetitorUpdate,
+@router.put("/{judge_id}", response_model=JudgeResponse)
+async def update_judge(
+        judge_id: int,
+        judge_update: JudgeBase,
         db: Session = Depends(get_db)
 ):
-    competitor = crud_competitors.update(db=db, id=competitor_id, obj_in=competitor_update.dict(exclude_unset=True))
+    judge = crud_judges.update(db=db, id=judge_id, obj_in=judge_update.dict(exclude_unset=True))
 
-    if competitor is None:
-        raise HTTPException(status_code=404, detail="Competitor not found")
-    return CompetitorResponse.from_orm(competitor)
+    if judge is None:
+        raise HTTPException(status_code=404, detail="Judge not found")
+    return JudgeResponse.from_orm(judge)
 
 
-@router.delete("/{competitor_id}")
-async def delete_competitor(id: int, db: Session = Depends(get_db)):
+@router.delete("/{judge_id}")
+async def delete_judge(id: int, db: Session = Depends(get_db)):
     try:
-        crud_competitors.delete(db=db, id=id)
+        crud_judges.delete(db=db, id=id)
         return status.HTTP_204_NO_CONTENT
     except Exception as e:
-        raise HTTPException(status_code=404, detail="Competitor not found")
+        raise HTTPException(status_code=404, detail="Judge not found")

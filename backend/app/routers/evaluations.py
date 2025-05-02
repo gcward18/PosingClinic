@@ -12,12 +12,17 @@ from app.models.models import Evaluation
 import io
 from PIL import Image
 
+from app.schemas.evaluations_schema import EvaluationResponse
+from app.services.evaluation_crud import CRUDEvaluation
+
 router = APIRouter(
     prefix="/evaluations",
     tags=["evaluations"],
     responses={404: {"description": "Not found"}},
     dependencies=[],
 )
+
+crud_evaluations = CRUDEvaluation(Evaluation)
 
 async def get_feedback(encoded_image: str) -> str:
     """
@@ -58,6 +63,7 @@ async def get_feedback(encoded_image: str) -> str:
     response_content = completion.choices[0].message.content
     return response_content
 
+
 async def process_file(file: UploadFile = File(...)) -> [str, str]:
     """
     Function to process the uploaded file.
@@ -91,6 +97,7 @@ async def process_file(file: UploadFile = File(...)) -> [str, str]:
     )
     return encoded_image, unique_filename
 
+
 @router.post("/upload")
 async def upload_file(file: UploadFile = File(...), db: Session = Depends(get_db)):
     try:
@@ -120,10 +127,12 @@ async def upload_file(file: UploadFile = File(...), db: Session = Depends(get_db
             content={"error": str(e)}
         )
 
+
 @router.get("/")
 async def list_evaluations(db: Session = Depends(get_db)):
     evaluations = db.query(Evaluation).order_by(Evaluation.created_at.desc()).all()
     return evaluations
+
 
 @router.get("/file/{bucket_name}/{filename}")
 async def get_file(bucket_name: str, filename: str):
@@ -137,3 +146,12 @@ async def get_file(bucket_name: str, filename: str):
         return StreamingResponse(data, media_type=mime_type)
     except Exception as e:
         raise HTTPException(status_code=404, detail=str(e))
+
+
+
+@router.get("/{evaluation_id}", response_model=EvaluationResponse)
+async def get_evaluation(evaluation_id: int, db: Session = Depends(get_db)):
+    evaluation = crud_evaluations.get(id=evaluation_id, db=db)
+    if evaluation is None:
+        raise HTTPException(status_code=404, detail="Evaluation not found")
+    return EvaluationResponse.from_orm(evaluation)

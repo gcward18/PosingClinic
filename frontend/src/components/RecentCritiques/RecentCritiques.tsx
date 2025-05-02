@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 interface Evaluation {
     id: number;
@@ -37,7 +38,7 @@ const RecentCritiques: React.FC = () => {
     if (loading) {
         return (
             <section id="recent-critiques" className="mb-12">
-                <h2 className="text-2xl mb-6">Recent Critiques</h2>
+                <h2 className="text-2xl mb-6">Previous Critiques</h2>
                 <div>Loading...</div>
             </section>
         );
@@ -45,7 +46,7 @@ const RecentCritiques: React.FC = () => {
 
     return (
         <section id="recent-critiques" className="mb-12">
-            <h2 className="text-2xl mb-6">Recent Critiques</h2>
+            <h2 className="text-2xl mb-6">Previous Critiques</h2>
             <div className="grid md:grid-cols-3 gap-6">
                 {evaluations.map(evaluation => {
                     // Extract bucket and filename from image_path
@@ -53,25 +54,36 @@ const RecentCritiques: React.FC = () => {
                     const imageUrl = `${import.meta.env.VITE_API_URL}/evaluations/file/${bucket}/${filename}`;
                     
                     return (
-                        <div key={evaluation.id} className="border rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+                        <div key={evaluation.id} 
+                            className="grid grid-cols-3 border rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
+                        >
                             <div className="h-48 overflow-hidden">
                                 <img 
                                     src={imageUrl}
                                     alt="Pose critique" 
-                                    className="w-full h-full object-cover [object-position:center_25%]"
+                                    className="w-full h-full object-cover [object-position:center_25%] col-span-1"
                                     loading='lazy'
                                 />
                             </div>
-                            <div className="p-4">
+                            <div className="p-4 col-span-2">
                                 <div className="flex items-center justify-between mb-2">
                                     <span className="font-medium">AI Critique</span>
                                     <span className="text-neutral-600 text-sm">
                                         {formatDate(evaluation.created_at)}
                                     </span>
                                 </div>
-                                <p className="text-neutral-600 text-sm line-clamp-2">
-                                    {evaluation.feedback}
+                                <p className="text-neutral-600 text-sm line-clamp-2 flex-grow">
+                                    {evaluation.feedback.replace(/\*/g, '')}
                                 </p>
+                                <Link 
+                                    to={`/critique/${evaluation.id}`}
+                                    className="mt-3 inline-flex items-center text-sm text-blue-600 hover:text-blue-800"
+                                >
+                                    <span>View Full Critique</span>
+                                    <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </Link>
                             </div>
                         </div>
                     );

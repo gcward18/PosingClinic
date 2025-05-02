@@ -1,20 +1,23 @@
+from datetime import datetime
+
 from pydantic import BaseModel
 from typing import Optional
 
 
-class JudgeBase(BaseModel):
-    firstname: Optional[str]
-    lastname: Optional[str]
+class EvaluationBase(BaseModel):
+    feedback: Optional[str]
+    image_path: Optional[str]
+    created_at: Optional[datetime]
 
     class Config:
         arbitrary_types_allowed = True
 
 
-class JudgeCreate(JudgeBase):
+class EvaluationCreate(EvaluationBase):
     pass
 
 
-class JudgeResponse(JudgeBase):
+class EvaluationResponse(EvaluationBase):
     id: int
 
     class Config:

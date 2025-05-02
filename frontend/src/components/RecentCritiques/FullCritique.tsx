@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 
 interface Evaluation {
     id: number;
@@ -62,7 +63,7 @@ const FullCritique: React.FC = () => {
                         </span>
                     </div>
                     <p className="text-neutral-700 whitespace-pre-wrap">
-                        {evaluation.feedback}
+                        <ReactMarkdown>{evaluation.feedback}</ReactMarkdown>
                     </p>
                 </div>
             </div>

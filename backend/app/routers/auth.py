@@ -6,9 +6,9 @@ from starlette import status
 
 from app import settings
 from app.config import create_access_token
-from app.database import get_current_user, get_db, authenticate_user
+from app.database import get_db, authenticate_user
 from app.models.models import User
-from app.schemas.user_schema import UserCreate, UserLogin
+from app.schemas.user_schema import UserCreate
 
 router = APIRouter(
     prefix="/auth",
