@@ -1,68 +1,55 @@
+export class EntityAPI {
+    private entityName: string;
+    private apiUrl: string;
 
-export async function registerUser(data: { username: string, email: string, password: string }) {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/register`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-    });
-    if (!response.ok) {
-        throw new Error('Network response was not ok');
+    constructor(public name: string) {
+        this.entityName = name
+        this.apiUrl = `${import.meta.env.VITE_API_URL}/${this.entityName}/`
     }
-    const result = await response.json();
-    return result;
-}
 
-export async function loginUser(data: { username: string, password: string }) {
-    const formData = new URLSearchParams();
-    formData.append('username', data.username);
-    formData.append('password', data.password);
-    // @ts-ignore
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: formData.toString(),
-    });
-    if (!response.ok) {
-        throw new Error('Network response was not ok');
+    async getAll() {
+        const response = await fetch(this.apiUrl)
+        const data = await response.json()
+        return data
     }
-    const result = await response.json();
 
-    if (result.access_token) {
-        localStorage.setItem('access_token', result.access_token);
-    }
-    return result;
-}
+    async create(entity: any) {
+        const response = await fetch(this.apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(entity)
+        })
 
-export async function logoutUser() {
-    // @ts-ignore
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/logout`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    });
-    if (!response.ok) {
-        throw new Error('Network response was not ok');
+        const data = await response.json()
+        return data;
     }
-    const result = await response.json();
-    return result;
-}
 
-export async function getUser() {
-    // @ts-ignore
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/current_user`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    });
-    if (!response.ok) {
-        throw new Error('Network response was not ok');
+    async getById(id: string) {
+        const response = await fetch(`${this.apiUrl}${id}`)
+        const data = await response.json()
+        return data
     }
-    const result = await response.json();
-    return result;
+
+    async update(id: string, entity: any) {
+        const response = await fetch(`${this.apiUrl}${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(entity)
+        })
+
+        const data = await response.json()
+        return data;
+    }
+
+    async delete(id: string) {
+        const response = await fetch(`${this.apiUrl}${id}`, {
+            method: 'DELETE',
+        });
+        const data = await response.json();
+        return data;
+    }
 }

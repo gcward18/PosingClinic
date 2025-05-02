@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 
 from app.database import get_db
 from app.models.models import User
-from app.schemas.user_schema import UserCreate, UserUpdate
+from app.schemas.user_schema import UserCreate, UserBase
 from app.services.user_crud import CRUDUser
 from starlette import status
 
@@ -40,7 +40,7 @@ async def create_user(body: UserCreate, session: Session = Depends(get_db)):
 
 
 @router.put("/{id}")
-async def update_user(id: int, body: UserUpdate, session: Session = Depends(get_db)):
+async def update_user(id: int, body: UserBase, session: Session = Depends(get_db)):
     try:
         user = crud_user.update(session, id, User(**body.dict()))
         return user

@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import UploadPhoto from './UploadPhoto';
-import UploadVideo from './UploadVideo';
+import ImageCard from '../Feedback/ImageCard';
+import { useFeedbackContext } from '../contexts/FeedbackContext';
 
 const UploadSection: React.FC = () => {
+    const {imageUrl} = useFeedbackContext();
 
     return (
-        <section id="upload-section" className="mb-12">           
-            <h2 className="text-2xl mb-6">Upload Your Content</h2>
-            <div className="grid md:grid-cols-1 gap-8">
-                <UploadPhoto />
-                {/* <UploadVideo /> */}
-            </div>
+        <section id="upload-section" className="mb-12 col-span-1">                 
+            <ImageCard src={imageUrl || ' '} size="w-full aspect-square" />
+            <UploadPhoto />
         </section>
     );
 };

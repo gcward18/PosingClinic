@@ -1,62 +1,50 @@
 [
   {
     "firstname": "Akbar",
-    "lastname": "Khazaei",
-    "dob": "1980-08-11"
+    "lastname": "Khazaei"
   },
   {
     "firstname": "Sandy",
-    "lastname": "Williamson",
-    "dob": ""
+    "lastname": "Williamson"
   },
   {
     "firstname": "John",
-    "lastname": "Hnatyschak",
-    "dob": ""
+    "lastname": "Hnatyschak"
   },
   {
     "firstname": "Peter-John",
-    "lastname": "Rhoden",
-    "dob": ""
+    "lastname": "Rhoden"
   },
   {
     "firstname": "David",
-    "lastname": "Herskovitz",
-    "dob": ""
+    "lastname": "Herskovitz"
   },
   {
     "firstname": "Serge",
-    "lastname": "Saric",
-    "dob": ""
+    "lastname": "Saric"
   },
   {
     "firstname": "Tim",
-    "lastname": "Gardner",
-    "dob": ""
+    "lastname": "Gardner"
   },
   {
     "firstname": "Tony",
-    "lastname": "Curtis",
-    "dob": ""
+    "lastname": "Curtis"
   },
   {
     "firstname": "Deke",
-    "lastname": "Warner",
-    "dob": ""
+    "lastname": "Warner"
   },
   {
     "firstname": "Vince",
-    "lastname": "Crawford",
-    "dob": ""
+    "lastname": "Crawford"
   },
   {
     "firstname": "Fabian",
-    "lastname": "Orozco",
-    "dob": ""
+    "lastname": "Orozco"
   },
   {
     "firstname": "Garron",
-    "lastname": "Whitehead",
-    "dob": ""
+    "lastname": "Whitehead"
   }
 ]

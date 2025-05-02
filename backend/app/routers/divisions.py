@@ -3,10 +3,10 @@ from sqlalchemy.orm import Session
 from fastapi import Depends
 from app.database import get_db
 from app.models.models import Division
-from app.schemas.division_schema import DivisionResponse, DivisionCreate, DivisionUpdate
+from app.schemas.divisions_schema import DivisionResponse, DivisionCreate, DivisionBase
 from starlette import status
 
-from backend.app.services.division_crud import CRUDDivision
+from app.services.division_crud import CRUDDivision
 
 router = APIRouter(
     prefix="/divisions",
@@ -34,7 +34,7 @@ async def post_division(division_body: DivisionCreate, db: Session = Depends(get
 @router.put("/{division_id}", response_model=DivisionResponse)
 async def update_division(
         division_id: int,
-        division_update: DivisionUpdate,
+        division_update: DivisionBase,
         db: Session = Depends(get_db)
 ):
     division = crud_divisions.update(db=db, id=division_id, obj_in=division_update.dict(exclude_unset=True))

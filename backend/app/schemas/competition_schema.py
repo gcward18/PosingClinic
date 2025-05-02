@@ -1,10 +1,13 @@
 from pydantic import BaseModel
+from typing import Optional
 
 
 class CompetitionBase(BaseModel):
-    firstname: str
-    lastname: str
-    dob: str
+    name: Optional[str] = None
+    date: Optional[str] = None
+
+    class Config:
+        arbitrary_types_allowed = True
 
 
 class CompetitionCreate(CompetitionBase):

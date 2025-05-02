@@ -1,62 +1,20 @@
 [
   {
-    "firstname": "Akbar",
-    "lastname": "Khazaei",
-    "dob": "1980-08-11"
+    "user_id": 1,
+    "height": 178,
+    "weight": 90,
+    "sex": "male"
   },
   {
-    "firstname": "Sandy",
-    "lastname": "Williamson",
-    "dob": ""
+    "user_id": 2,
+    "height": 182,
+    "weight": 85,
+    "sex": "male"
   },
   {
-    "firstname": "John",
-    "lastname": "Hnatyschak",
-    "dob": ""
-  },
-  {
-    "firstname": "Peter-John",
-    "lastname": "Rhoden",
-    "dob": ""
-  },
-  {
-    "firstname": "David",
-    "lastname": "Herskovitz",
-    "dob": ""
-  },
-  {
-    "firstname": "Serge",
-    "lastname": "Saric",
-    "dob": ""
-  },
-  {
-    "firstname": "Tim",
-    "lastname": "Gardner",
-    "dob": ""
-  },
-  {
-    "firstname": "Tony",
-    "lastname": "Curtis",
-    "dob": ""
-  },
-  {
-    "firstname": "Deke",
-    "lastname": "Warner",
-    "dob": ""
-  },
-  {
-    "firstname": "Vince",
-    "lastname": "Crawford",
-    "dob": ""
-  },
-  {
-    "firstname": "Fabian",
-    "lastname": "Orozco",
-    "dob": ""
-  },
-  {
-    "firstname": "Garron",
-    "lastname": "Whitehead",
-    "dob": ""
+    "user_id": 3,
+    "height": 165,
+    "weight": 60,
+    "sex": "female"
   }
 ]

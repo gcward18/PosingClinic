@@ -3,10 +3,10 @@ from sqlalchemy.orm import Session
 from fastapi import Depends
 from app.database import get_db
 from app.models.models import Competitor
-from app.schemas.competitor_schema import CompetitorResponse, CompetitorCreate, CompetitorUpdate
+from app.schemas.competitor_schema import CompetitorResponse, CompetitorCreate, CompetitorBase
 from starlette import status
 
-from backend.app.services.competitor_crud import CRUDCompetitor
+from app.services.competitor_crud import CRUDCompetitor
 
 router = APIRouter(
     prefix="/competitors",
@@ -34,7 +34,7 @@ async def post_competitor(competitor_body: CompetitorCreate, db: Session = Depen
 @router.put("/{competitor_id}", response_model=CompetitorResponse)
 async def update_competitor(
         competitor_id: int,
-        competitor_update: CompetitorUpdate,
+        competitor_update: CompetitorBase,
         db: Session = Depends(get_db)
 ):
     competitor = crud_competitors.update(db=db, id=competitor_id, obj_in=competitor_update.dict(exclude_unset=True))

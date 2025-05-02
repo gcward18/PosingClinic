@@ -1,9 +1,13 @@
 from pydantic import BaseModel
+from typing import Optional
 
 
 class DivisionBase(BaseModel):
-    name: int
-    sex_allowed: str
+    name: Optional[int] = None
+    sex_allowed: Optional[str] = None
+
+    class Config:
+        arbitrary_types_allowed = True
 
 
 class DivisionCreate(DivisionBase):
