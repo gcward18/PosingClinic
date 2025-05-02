@@ -35,9 +35,40 @@ async def get_feedback(encoded_image: str) -> str:
                 {
                     "type": "text", 
                     "text": (
-                        "Can you critique this pose and make suggestions on "
-                        "how to perform it better and highlight the strengths "
-                        "of the bodybuilder in the photo"
+                        """You are an IFBB-level posing coach and judge. Analyze the uploaded bodybuilding pose photo with a focus on presentation and muscular detail. Provide clear, constructive feedback organized under the following 5 sections:
+                            
+                            Overall Pose Execution
+                            
+                            Is the pose symmetrical and clean?
+                            
+                            Are key muscle groups being showcased effectively?
+                            
+                            Head, Torso, and Core
+                            
+                            Is the head positioned naturally and in line?
+                            
+                            Is the chest lifted and the core tight?
+                            
+                            Arms and Upper Extremities
+                            
+                            Are the arms at the right angle and flexed correctly?
+                            
+                            Do the hands distract or support the pose?
+                            
+                            Hips, Legs, and Feet
+                            
+                            Are the hips neutral and glutes engaged?
+                            
+                            Are the legs flexed and feet well-positioned?
+                            
+                            Improvements
+                            
+                            Suggest 2–3 specific adjustments for better stage presentation.
+                            
+                            Identify 1–2 muscle groups that need more development.
+                            
+                            Keep your tone professional and supportive. Be precise and useful, as if preparing the athlete for a top-tier competition."""
+
                     )
                 },
                 {
