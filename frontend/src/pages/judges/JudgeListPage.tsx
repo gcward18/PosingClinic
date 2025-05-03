@@ -1,5 +1,6 @@
 import React from "react";
-import JudgeAddForm from "../../components/forms/judges/JudgeAddForm";
+import {JudgeProvider} from "../../components/contexts/JudgeContext";
+import JudgeTable from "../../components/tables/JudgeTable";
 
 export default function JudgeAddPage() {
     // @ts-ignore
@@ -7,7 +8,9 @@ export default function JudgeAddPage() {
         <div className="flex items-center justify-center  ">
             <div className="p-6 rounded shadow-md w-full max-w-sm">
                 <h2 className="text-2xl font-bold mb-4">Add Judge</h2>
-                <JudgeAddForm />
+                <JudgeProvider>
+                    <JudgeTable />
+                </JudgeProvider>
             </div>
         </div>
     );

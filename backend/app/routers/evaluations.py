@@ -119,13 +119,16 @@ async def process_file(file: UploadFile = File(...)) -> [str, str]:
     unique_filename = f"{datetime.utcnow().strftime('%Y%m%d')}_{uuid.uuid4()}.webp"
     
     # Upload to MinIO
-    minio_client.put_object(
-        BUCKET_NAME,
-        unique_filename,
-        io.BytesIO(file_content),
-        length=len(file_content),
-        content_type=file.content_type
-    )
+    try:
+        minio_client.put_object(
+            BUCKET_NAME,
+            unique_filename,
+            io.BytesIO(file_content),
+            length=len(file_content),
+            content_type=file.content_type
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error uploading file: {str(e)}")
     return encoded_image, unique_filename
 
 
@@ -133,10 +136,10 @@ async def process_file(file: UploadFile = File(...)) -> [str, str]:
 async def upload_file(file: UploadFile = File(...), db: Session = Depends(get_db)):
     try:
         encoded_image, unique_filename = await process_file(file)
-        
+        print(f"File uploaded to MinIO: {unique_filename}")
         # Get AI feedback
         response_content = await get_feedback(encoded_image)
-        
+        print(response_content)
         # Save to database
         evaluation = Evaluation(
             image_path=f"{BUCKET_NAME}/{unique_filename}",
@@ -145,7 +148,7 @@ async def upload_file(file: UploadFile = File(...), db: Session = Depends(get_db
         db.add(evaluation)
         db.commit()
         db.refresh(evaluation)
-        
+
         return JSONResponse(content={
             "response": response_content,
             "evaluation_id": evaluation.id,
