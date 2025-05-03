@@ -1,0 +1,54 @@
+[
+  {
+    "name": "Men's Bodybuilding",
+    "sex_allowed": "male"
+  },
+  {
+    "name": "Men's 212 Bodybuilding",
+    "sex_allowed": "male"
+  },
+  {
+    "name": "Men's Classic Physique",
+    "sex_allowed": "male"
+  },
+  {
+    "name": "Men's Physique",
+    "sex_allowed": "male"
+  },
+  {
+    "name": "Men's Wheelchair Bodybuilding",
+    "sex_allowed": "male"
+  },
+  {
+    "name": "Women's Bodybuilding",
+    "sex_allowed": "female"
+  },
+  {
+    "name": "Women's Physique",
+    "sex_allowed": "female"
+  },
+  {
+    "name": "Women's Figure",
+    "sex_allowed": "female"
+  },
+  {
+    "name": "Women's Fitness",
+    "sex_allowed": "female"
+  },
+  {
+    "name": "Women's Bikini",
+    "sex_allowed": "female"
+  },
+  {
+    "name": "Women's Wellness",
+    "sex_allowed": "female"
+  },
+  {
+    "name": "Women's Wheelchair Bodybuilding",
+    "sex_allowed": "female"
+  },
+  {
+    "name": "Fit Model",
+    "sex_allowed": "female"
+  }
+]
