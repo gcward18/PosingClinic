@@ -22,7 +22,7 @@ An AI-powered application that provides real-time feedback and critiques for bod
 ### Prerequisites
 - Docker and Docker Compose
 - Node.js 18+ (for local development)
-- Python 3.11+ (for local development)
+- Python 3.12+ (for local development)
 - A Groq API key
 
 ### Environment Setup

@@ -18,6 +18,7 @@ export default function JudgeAddForm() {
             alert(`Adding ${firstname} ${lastname} failed. Please try again.`);
         }
     };
+    
     return (
         <div className="flex items-center justify-center ">
             <form onSubmit={handleSubmit}>
