@@ -15,11 +15,11 @@ if [ ! -f .env ]; then
 POSTGRES_USER=admin
 POSTGRES_PASSWORD=secret
 POSTGRES_DB=mydb
-MINIO_ROOT_USER=minioadmin
-MINIO_ROOT_PASSWORD=minioadmin
-MINIO_ENDPOINT=minio:9000
-MINIO_ACCESS_KEY=minioadmin
-MINIO_SECRET_KEY=minioadmin
+MINIO_ROOT_USER="minioadmin"
+MINIO_ROOT_PASSWORD="minioadmin"
+MINIO_ENDPOINT="minio:9000"
+MINIO_ACCESS_KEY="minioadmin"
+MINIO_SECRET_KEY="minioadmin"
 GROQ_API_KEY=your_groq_api_key
 EOL
 fi
