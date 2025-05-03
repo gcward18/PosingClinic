@@ -1,18 +1,28 @@
+# IDE and Editor files
 .vscode
+.idea
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
 backend/llama-venv
 backend/uploads
 backend/.env
 backend/venv/*
 
+# Node
+**/node_modules/
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Frontend specific
 frontend/.env
-frontend/node_modules
 frontend/build
-frontend/.vscode
-frontend/.DS_Store
-frontend/.idea
 frontend/package-lock.json
 
+# Environment variables
 .env
-.idea
-
-node_modules
