@@ -12,6 +12,36 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
+  redis:
+    image: redis:2.6.17
+    container_name: redis-d
+    restart: always
+    ports:
+      - "6397:6397"
+    volumes:
+      - redis_data:/data
+    command: redis-server
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
   minio:
     image: quay.io/minio/minio
     container_name: minio
@@ -71,6 +101,7 @@ services:
 volumes:
   pgdata:
   minio-data:
+  redis-data:
 
 networks:
   app-network:
