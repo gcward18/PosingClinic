@@ -1,0 +1,50 @@
+{
+    "configurations": [
+        
+        {
+            "name": "🔗 Attach to Remote Python",
+            "type": "python",
+            "request": "attach",
+            "connect": {
+                "host": "localhost",
+                "port": 5678
+            },
+            "pathMappings": [
+                {
+                    "localRoot": "${workspaceFolder}/backend",
+                    "remoteRoot": "/app"
+                }
+            ]
+        },
+        {
+            "name": "🐍 Python: FastAPI",
+            "type": "python",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "app.main:app",
+                "--reload",
+                "--port",
+                "8000",
+                "--host",
+                "0.0.0.0"
+            ],
+            "jinja": true,
+            "justMyCode": true,
+            "cwd": "${workspaceFolder}/backend"
+        },
+        {
+            "name": "⛁ Python: Populate DB",
+            "type": "python",
+            "request": "launch",
+            "module": "app.populate_db",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/backend/venv/bin/python",
+                "ENV_FILE_PATH": "${workspaceFolder}/.env"
+            },
+            "cwd": "${workspaceFolder}/backend"
+        }
+    ]
+}
