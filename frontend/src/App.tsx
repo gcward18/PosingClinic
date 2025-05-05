@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import HomePage from './pages/HomePage';
@@ -15,11 +15,13 @@ import FullCritique from './components/RecentCritiques/FullCritique';
 import JudgeListPage from "./pages/judges/JudgeListPage";
 
 const App: React.FC = () => {
-  // @ts-ignore
+    const location = useLocation();
+    const isAuthPage = location.pathname === '/login' || location.pathname === '/register';  
+    // @ts-ignore
     return (
     <div className="bg-gray-100 min-h-screen">
         {/* Add your navigation bar here */}
-        <NavBar></NavBar>
+        {isAuthPage === false && <NavBar></NavBar>}
         <div className="container mx-auto px-4 py-8">
             <Routes>
                 <Route path="/" element={<Navigate to="/home" replace />} />
