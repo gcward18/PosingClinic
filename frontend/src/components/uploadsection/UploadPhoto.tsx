@@ -1,9 +1,46 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFeedbackContext } from '../contexts/FeedbackContext';
 
 const UploadPhoto: React.FC = () => {
-    const { setImageUrl, setFeedback } = useFeedbackContext();
+    const { setImageUrl, setFeedback, setLoading } = useFeedbackContext();
+    const workerRef = React.useRef<Worker | null>(null);
+
+    useEffect(() => {
+        // initalize the worker
+        const worker = new Worker(
+            new URL('../../utils/workers/sseWorker.ts', import.meta.url),
+            { type: 'module' }
+        );
+
+        worker.onmessage = (event) => {
+            switch (event.data.type) {
+                case 'evaluation_response':
+                    setFeedback(event.data.data.result);
+                    setLoading(false);
+                    break;
+                case 'sse_error':
+                    console.error('SSE Error:', event.data.error);
+                    setLoading(false);
+                    setFeedback('Error receiving updates');
+                    break;
+
+            }
+        };
+
+        worker.onerror = (error) => {
+            console.error('Worker error:', error);
+            setLoading(false);
+            setFeedback('Error in worker communication');
+        };
+
+        workerRef.current = worker;
+
+        return () => {
+            worker.postMessage({ type: 'close' });
+            worker.terminate();
+        }
+    }, []);
 
     const handlePhotoUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
         try {
@@ -16,19 +53,18 @@ const UploadPhoto: React.FC = () => {
     
             const formData = new FormData();
             formData.append('file', file);
-    
+
+            // request to upload the file and receive the feedback, set loading to true
+            setLoading(true);
             const response = await fetch(`${import.meta.env.VITE_API_URL}/evaluations/upload`, {
                 method: 'POST',
                 body: formData,
             });
     
             if (!response.ok) {
+                setLoading(false);
                 throw new Error('Network response was not ok');
             }
-    
-            const data = await response.json();
-            console.log('File uploaded successfully:', data.response);
-            setFeedback(data.response);
         } catch (error) {
             console.error('Error uploading file:', error);
             setFeedback('Error uploading file');

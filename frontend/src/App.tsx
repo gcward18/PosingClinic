@@ -11,8 +11,9 @@ import CompetitorAddPage from "./pages/competitors/CompetitorAddPage";
 import CompetitionAddPage from "./pages/competitions/CompetitionsAddPage";
 import UserAddPage from "./pages/users/UsersAddPage";
 import NotFoundPage from './pages/NotFoundPage';
-import FullCritique from './components/RecentCritiques/FullCritique';
+import FullCritique from './components/recentcritiques/FullCritique';
 import JudgeListPage from "./pages/judges/JudgeListPage";
+import SSEComponent from "./components/ssecomponent/SSEComponent";
 
 const App: React.FC = () => {
     const location = useLocation();
@@ -32,6 +33,7 @@ const App: React.FC = () => {
                 <Route path="/division" element={<DivisionAddPage/>}/>
                 <Route path="/competitor" element={<CompetitorAddPage/>}/>
                 <Route path="/competition" element={<CompetitionAddPage/>}/>
+                <Route path="/stream" element={<SSEComponent/>}/>
                 <Route path="/user" element={<UserAddPage/>}/>
                 <Route path="/home" element={<ProtectedRoute><HomePage /></ProtectedRoute>} />
                 <Route path="/critique/:id" element={<FullCritique />} />

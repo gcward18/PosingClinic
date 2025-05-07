@@ -14,7 +14,8 @@
                     "localRoot": "${workspaceFolder}/backend",
                     "remoteRoot": "/app"
                 }
-            ]
+            ],
+            "justMyCode": false
         },
         {
             "name": "🐍 Python: FastAPI",
