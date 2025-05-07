@@ -1,5 +1,5 @@
 import mimetypes
-from fastapi import APIRouter, File, UploadFile, Depends
+from fastapi import APIRouter, File, UploadFile, Depends, Request
 from fastapi.responses import JSONResponse, StreamingResponse
 from fastapi.exceptions import HTTPException
 import base64
@@ -11,9 +11,12 @@ from app.database import get_db, minio_client, BUCKET_NAME
 from app.models.models import Evaluation
 import io
 from PIL import Image
-
+import asyncio
+from typing import AsyncGenerator
+import json
 from app.schemas.evaluations_schema import EvaluationResponse
 from app.services.evaluation_crud import CRUDEvaluation
+from app.services.evaluation_queue import evaluation_queue,EvaluationStatus
 
 router = APIRouter(
     prefix="/evaluations",
@@ -23,6 +26,55 @@ router = APIRouter(
 )
 
 crud_evaluations = CRUDEvaluation(Evaluation)
+
+def format_sse_event(id: int, event: str, data: dict) -> str:
+    """
+    Function to format the server-sent event.
+    """
+    event_data = f"id: {id}\nevent: {event}\ndata: {data}\n\n"
+    return event_data
+
+async def event_generator() -> AsyncGenerator[str, None]:
+    """
+    Function to generate events for streaming.
+    Sends evaluation status updates when available.
+    """
+    while True:
+        if evaluation_queue:
+            evaluation = evaluation_queue.popleft()
+            
+            event_data = {
+                "type": "evaluation_response",
+                "id": evaluation.id,
+                "status": evaluation.status,
+            }
+            
+            if evaluation.result:
+                event_data["result"] = evaluation.result
+            
+            sse_event = format_sse_event(
+                id=evaluation.id,
+                event=evaluation.status,
+                data=json.dumps(event_data)
+            )
+            
+            yield sse_event.encode("utf-8")
+        await asyncio.sleep(1)
+
+
+@router.get("/stream")
+async def stream_events(request: Request):
+    '''
+    Endpoint that returns a server sent event stream.
+    '''
+    async def generator():
+        async for event in event_generator():
+            yield event
+            if await request.is_disconnected():
+                print("Client disconnected")
+                break
+    return StreamingResponse(generator(), media_type="text/event-stream")
+
 
 async def get_feedback(encoded_image: str) -> str:
     """
@@ -132,27 +184,56 @@ async def process_file(file: UploadFile = File(...)) -> [str, str]:
     return encoded_image, unique_filename
 
 
+async def process_evaluation(evaluation_id: int, encoded_image: str, db: Session, evaluation_status: EvaluationStatus):
+    """
+    Function to process the evaluation.
+    """
+    try: 
+        # get ai critique
+        feedback = await get_feedback(encoded_image)
+        
+        # update evaluation status
+        evaluation = crud_evaluations.get(id=evaluation_id, db=db)
+        evaluation.feedback = feedback
+        db.commit()
+        
+        # Update evaluation status for SSE
+        evaluation_status.status = "completed"
+        evaluation_status.result = feedback
+    except Exception as e:
+        # Update evaluation status for SSE
+        evaluation_status.status = 'failed'
+        evaluation_status.result = str(e)
+        
+
 @router.post("/upload")
 async def upload_file(file: UploadFile = File(...), db: Session = Depends(get_db)):
     try:
         encoded_image, unique_filename = await process_file(file)
-        print(f"File uploaded to MinIO: {unique_filename}")
-        # Get AI feedback
-        response_content = await get_feedback(encoded_image)
-        print(response_content)
-        # Save to database
+
+        # Create evaluation entry in the database
         evaluation = Evaluation(
             image_path=f"{BUCKET_NAME}/{unique_filename}",
-            feedback=response_content
+            feedback=""
         )
         db.add(evaluation)
         db.commit()
         db.refresh(evaluation)
 
+        # add event to the processing queue
+        evaluation_status = EvaluationStatus(
+            id=evaluation.id,
+            status="processing",
+            created_at=datetime.utcnow()
+        )
+        evaluation_queue.append(evaluation_status)
+        
+        # process the feedback asynchronously
+        asyncio.create_task(process_evaluation(evaluation.id, encoded_image, db, evaluation_status))
+        
         return JSONResponse(content={
-            "response": response_content,
-            "evaluation_id": evaluation.id,
-            "image_path": evaluation.image_path
+            "message": "Evaluation processing",
+            "evaluation_id": evaluation.id
         })
         
     except Exception as e:
