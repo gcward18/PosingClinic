@@ -5,7 +5,7 @@ import RegisterPage from './pages/RegisterPage';
 import HomePage from './pages/HomePage';
 import ProtectedRoute from './components/guards/ProtectedRoute';
 import JudgeAddPage from "./pages/judges/JudgeAddPage";
-import NavBar from "./components/NavBar"
+import Sidebar from "./components/SideBar";
 import DivisionAddPage from "./pages/divisions/DivisionAddPage";
 import CompetitorAddPage from "./pages/competitors/CompetitorAddPage";
 import CompetitionAddPage from "./pages/competitions/CompetitionsAddPage";
@@ -22,7 +22,7 @@ const App: React.FC = () => {
     return (
     <div className="bg-gray-100 min-h-screen">
         {/* Add your navigation bar here */}
-        {isAuthPage === false && <NavBar></NavBar>}
+        {isAuthPage === false && <Sidebar></Sidebar>}
         <div className="container mx-auto px-4 py-8">
             <Routes>
                 <Route path="/" element={<Navigate to="/home" replace />} />

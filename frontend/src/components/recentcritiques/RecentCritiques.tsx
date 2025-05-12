@@ -54,37 +54,22 @@ const RecentCritiques: React.FC = () => {
                     const imageUrl = `${import.meta.env.VITE_API_URL}/evaluations/file/${bucket}/${filename}`;
                     
                     return (
-                        <div key={evaluation.id} 
-                            className="grid grid-cols-3 border rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
-                        >
-                            <div className="h-48 overflow-hidden">
-                                <img 
-                                    src={imageUrl}
-                                    alt="Pose critique" 
-                                    className="w-full h-full object-cover [object-position:center_25%] col-span-1"
-                                    loading='lazy'
-                                />
-                            </div>
-                            <div className="p-4 col-span-2">
-                                <div className="flex items-center justify-between mb-2">
-                                    <span className="font-medium">AI Critique</span>
-                                    <span className="text-neutral-600 text-sm">
-                                        {formatDate(evaluation.created_at)}
-                                    </span>
-                                </div>
-                                <p className="text-neutral-600 text-sm line-clamp-2 flex-grow">
-                                    {evaluation.feedback.replace(/\*/g, '')}
-                                </p>
-                                <Link 
-                                    to={`/critique/${evaluation.id}`}
-                                    className="mt-3 inline-flex items-center text-sm text-blue-600 hover:text-blue-800"
-                                >
-                                    <span>View Full Critique</span>
-                                    <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </Link>
-                            </div>
+                        <div className="relative block w-full aspect-square overflow-hidden group">
+                            <img 
+                                src={imageUrl}
+                                alt="Pose critique" 
+                                className="w-full h-full object-cover transition-transform group-hover:scale-105"
+                                loading='lazy'
+                            />
+
+                            {/* Button appears on hover */}
+                            <Link
+                                to={`/critique/${evaluation.id}`}
+                                className="absolute bottom-4 left-1/2 -translate-x-1/2 px-3 py-1 text-xl bg-blue-500/60 !text-white rounded opacity-0 group-hover:opacity-100 transition hover:cursor-pointer"
+                            >
+                                View
+                            </Link>
+                            
                         </div>
                     );
                 })}
@@ -94,3 +79,25 @@ const RecentCritiques: React.FC = () => {
 };
 
 export default RecentCritiques;
+
+
+// <div className="p-4 col-span-2">
+// <div className="flex items-center justify-between mb-2">
+//     <span className="font-medium">AI Critique</span>
+//     <span className="text-neutral-600 text-sm">
+//         {formatDate(evaluation.created_at)}
+//     </span>
+// </div>
+// <p className="text-neutral-600 text-sm line-clamp-2 flex-grow">
+//     {evaluation.feedback.replace(/\*/g, '')}
+// </p>
+// <Link 
+//     to={`/critique/${evaluation.id}`}
+//     className="mt-3 inline-flex items-center text-sm text-blue-600 hover:text-blue-800"
+// >
+//     <span>View Full Critique</span>
+//     <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+//     </svg>
+// </Link>
+// </div>
