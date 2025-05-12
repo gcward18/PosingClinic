@@ -82,7 +82,7 @@ const UploadPhoto: React.FC = () => {
                     id="photo-upload-file-input"
                     onChange={handlePhotoUpload}
                 />
-                <button className="bg-neutral-900 text-white px-6 py-2 rounded-lg" id="photo-upload-button" onClick={() => document.getElementById('photo-upload-file-input')?.click()}>
+                <button className="bg-blue-500 text-white px-6 py-2 rounded-lg" id="photo-upload-button" onClick={() => document.getElementById('photo-upload-file-input')?.click()}>
                     Select Photo
                 </button>
             </div>
