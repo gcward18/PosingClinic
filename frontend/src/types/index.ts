@@ -31,9 +31,8 @@ export interface Competitor {
 
 export interface Competition {
     id: number;
-    firstname: string;
-    lastname: string;
-    dob: string;
+    name: string;
+    date: string;
 }
 
 export interface Critique {
