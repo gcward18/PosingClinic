@@ -22,7 +22,7 @@ export default function DivisionAddForm() {
         <div className="flex items-center justify-center  ">
             <form onSubmit={handleSubmit}>
                 <div className="mb-4">
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700">First Name</label>
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700">Division Name</label>
                     <input
                         type="text"
                         id="name"
@@ -33,8 +33,7 @@ export default function DivisionAddForm() {
                     />
                 </div>
                 <div className="mb-4">
-                    <label htmlFor="sexAllowed" className="block text-sm font-medium text-gray-700">Last
-                        Name</label>
+                    <label htmlFor="sexAllowed" className="block text-sm font-medium text-gray-700">Sex Allowed</label>
                     <select
                         id="sexAllowed"
                         value={sexAllowed}
