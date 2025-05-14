@@ -3,9 +3,11 @@ FROM node:22
 WORKDIR /app
 
 COPY package*.json ./
+COPY frontend/package*.json ./
 RUN npm install
 
 COPY . .
+COPY frontend/ ./
 
 EXPOSE 5173
 
