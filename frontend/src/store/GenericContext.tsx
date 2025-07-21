@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
-import { EntityAPI } from '../../apis/entity_apis';
+import { EntityAPI } from '../apis/entity_apis';
 
 interface GenericContextType {
     data: any[];

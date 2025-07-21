@@ -1,5 +1,5 @@
 import React from "react";
-import { GenericProvider } from "../../components/contexts/GenericContext";
+import { GenericProvider } from "../../store/GenericContext";
 import GenericTable from "../../components/tables/GenericTable";
 
 export default function JudgesListPage() {

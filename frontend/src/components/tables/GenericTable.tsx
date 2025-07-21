@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { EntityAPI } from '../../apis/entity_apis';
-import { useGenericContext } from '../contexts/GenericContext';
+import { useGenericContext } from '../../store/GenericContext';
 import {
     Table,
     TableBody,

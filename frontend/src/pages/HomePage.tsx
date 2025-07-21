@@ -1,6 +1,6 @@
 import React from 'react';
 import Feedback from '../features/feedback/Feedback';
-import { ImageProvider } from '../components/contexts/FeedbackContext';
+import { ImageProvider } from '../store/FeedbackContext';
 import UploadSection from '../features/uploadsection/UploadSection';
 import RecentCritiques from '../features/recentcritiques/RecentCritiques';
 

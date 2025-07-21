@@ -5,7 +5,7 @@ import RegisterPage from './pages/RegisterPage';
 import HomePage from './pages/HomePage';
 import ProtectedRoute from './components/guards/ProtectedRoute';
 import JudgeAddPage from "./pages/judges/JudgeAddPage";
-import Sidebar from "./components/SideBar";
+import Sidebar from "./components/sidebars/SideBar";
 import DivisionAddPage from "./pages/divisions/DivisionAddPage";
 import CompetitorAddPage from "./pages/competitors/CompetitorAddPage";
 import CompetitionAddPage from "./pages/competitions/CompetitionsAddPage";

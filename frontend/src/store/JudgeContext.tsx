@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
-import {Judge} from "../../types";
-import { EntityAPI } from '../../apis/entity_apis';
+import {Judge} from "../types";
+import { EntityAPI } from '../apis/entity_apis';
 
 interface JudgeContextType {
     judges: Judge[];

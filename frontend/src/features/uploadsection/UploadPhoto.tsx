@@ -1,6 +1,6 @@
 
 import React, { useEffect } from 'react';
-import { useFeedbackContext } from '../../components/contexts/FeedbackContext'; 
+import { useFeedbackContext } from '../../store/FeedbackContext'; 
 
 const UploadPhoto: React.FC = () => {
     const { setImageUrl, setFeedback, setLoading } = useFeedbackContext();

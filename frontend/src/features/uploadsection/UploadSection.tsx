@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import UploadPhoto from './UploadPhoto';
 import ImageCard from '../feedback/ImageCard';
-import { useFeedbackContext } from '../../components/contexts/FeedbackContext';
+import { useFeedbackContext } from '../../store/FeedbackContext';
 
 const UploadSection: React.FC = () => {
     const {imageUrl} = useFeedbackContext();
