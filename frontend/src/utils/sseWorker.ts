@@ -30,7 +30,7 @@ function connectSSE() {
 
         const chunk = decoder.decode(value, { stream: true });
         const lines = (partialData + chunk).split('\n');
-        partialData = lines.pop(); // Store any incomplete line
+        partialData = lines.pop() || ''; // Store any incomplete line
 
         lines.forEach(line => {
           if (line.startsWith('data:')) {
