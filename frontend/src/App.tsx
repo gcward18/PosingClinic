@@ -12,7 +12,7 @@ import CompetitionAddPage from "./pages/competitions/CompetitionsAddPage";
 import UserAddPage from "./pages/users/UsersAddPage";
 import UsersListPage from "./pages/users/UsersListPage";
 import NotFoundPage from './pages/NotFoundPage';
-import FullCritique from './components/recentcritiques/FullCritique';
+import FullCritique from './features/recentcritiques/FullCritique';
 import JudgesListPage from "./pages/judges/JudgeListPage";
 import SSEComponent from "./components/ssecomponent/SSEComponent";
 

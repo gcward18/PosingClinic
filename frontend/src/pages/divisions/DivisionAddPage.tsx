@@ -1,5 +1,5 @@
 import React from "react";
-import DivisionAddForm from "../../components/forms/divisions/DivisionAddForm";
+import DivisionAddForm from "../../features/divisions/DivisionAddForm";
 
 export default function DivisionAddPage() {
     return (

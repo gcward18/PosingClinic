@@ -1,5 +1,5 @@
 import React from "react";
-import CompetitionAddForm from "../../components/forms/competitions/CompetitionAddForm";
+import CompetitionAddForm from "../../features/competitions/CompetitionAddForm";
 
 export default function CompetitionAddPage() {
     return (

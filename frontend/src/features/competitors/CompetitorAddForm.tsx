@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import {EntityAPI} from '../../../apis/entity_apis'
+import {EntityAPI} from '../../apis/entity_apis'
 import React from 'react';
-import {Competitor} from "../../../types";
+import {Competitor} from "../../types";
 
 export default function CompetitorAddForm() {
     const [height, setHeight] = useState('');

@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { useFeedbackContext } from '../contexts/FeedbackContext';
+import { useFeedbackContext } from '../../components/contexts/FeedbackContext';
 import { FaImage } from "react-icons/fa";
 
 interface ImageCardProps {

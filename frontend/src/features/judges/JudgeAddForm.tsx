@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import {EntityAPI} from '../../../apis/entity_apis'
 import React from 'react';
-import {Judge} from "../../../types";
+import { EntityAPI } from '../../apis/entity_apis';
+import { Judge } from '../../types';
 
 export default function JudgeAddForm() {
     const [firstname, setFirstName] = useState('');
