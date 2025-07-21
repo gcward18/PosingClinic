@@ -9,7 +9,7 @@ const UploadPhoto: React.FC = () => {
     useEffect(() => {
         // initalize the worker
         const worker = new Worker(
-            new URL('../../utils/workers/sseWorker.ts', import.meta.url),
+            new URL('../../utils/sseWorker.ts', import.meta.url),
             { type: 'module' }
         );
 
