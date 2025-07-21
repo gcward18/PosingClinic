@@ -1,5 +1,5 @@
 import React from "react";
-import UserAddForm from "../../components/forms/users/UserAddForm";
+import UserAddForm from "../../features/users/UserAddForm";
 
 export default function UserAddPage() {
     return (

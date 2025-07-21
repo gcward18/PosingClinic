@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import {EntityAPI} from '../../../apis/entity_apis'
+import {EntityAPI} from '../../apis/entity_apis'
 import React from 'react';
-import {Competition} from "../../../types";
+import {Competition} from "../../types";
 
 export default function CompetitionAddForm() {
     const [competitionName, setCompetitionName] = useState('');

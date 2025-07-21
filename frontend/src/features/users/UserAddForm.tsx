@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import {EntityAPI} from '../../../apis/entity_apis'
+import {EntityAPI} from '../../apis/entity_apis'
 import React from 'react';
-import {User} from "../../../types";
+import {User} from "../../types";
 
 export default function UserAddForm() {
     const [firstname, setFirstName] = useState('');

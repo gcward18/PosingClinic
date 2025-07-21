@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import 'zero-md';
 import ReactMarkdown from 'react-markdown';
-import { useFeedbackContext } from '../contexts/FeedbackContext';
+import { useFeedbackContext } from '../../store/FeedbackContext';
     
 declare global {
   namespace JSX {

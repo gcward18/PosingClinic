@@ -5,14 +5,15 @@ import RegisterPage from './pages/RegisterPage';
 import HomePage from './pages/HomePage';
 import ProtectedRoute from './components/guards/ProtectedRoute';
 import JudgeAddPage from "./pages/judges/JudgeAddPage";
-import Sidebar from "./components/SideBar";
+import Sidebar from "./components/sidebars/SideBar";
 import DivisionAddPage from "./pages/divisions/DivisionAddPage";
 import CompetitorAddPage from "./pages/competitors/CompetitorAddPage";
 import CompetitionAddPage from "./pages/competitions/CompetitionsAddPage";
 import UserAddPage from "./pages/users/UsersAddPage";
+import UsersListPage from "./pages/users/UsersListPage";
 import NotFoundPage from './pages/NotFoundPage';
-import FullCritique from './components/recentcritiques/FullCritique';
-import JudgeListPage from "./pages/judges/JudgeListPage";
+import FullCritique from './features/recentcritiques/FullCritique';
+import JudgesListPage from "./pages/judges/JudgeListPage";
 import SSEComponent from "./components/ssecomponent/SSEComponent";
 
 const App: React.FC = () => {
@@ -29,12 +30,13 @@ const App: React.FC = () => {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/judge" element={<JudgeAddPage/>}/>
-                <Route path="/judges" element={<JudgeListPage/>}/>
+                <Route path="/judges" element={<JudgesListPage/>}/>
                 <Route path="/division" element={<DivisionAddPage/>}/>
                 <Route path="/competitor" element={<CompetitorAddPage/>}/>
                 <Route path="/competition" element={<CompetitionAddPage/>}/>
                 <Route path="/stream" element={<SSEComponent/>}/>
                 <Route path="/user" element={<UserAddPage/>}/>
+                <Route path="/users" element={<UsersListPage/>}/>
                 <Route path="/home" element={<ProtectedRoute><HomePage /></ProtectedRoute>} />
                 <Route path="/critique/:id" element={<FullCritique />} />
                 <Route path="*" element={<NotFoundPage />} />

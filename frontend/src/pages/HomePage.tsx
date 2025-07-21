@@ -1,8 +1,8 @@
 import React from 'react';
-import Feedback from '../components/feedback/Feedback';
-import { ImageProvider } from '../components/contexts/FeedbackContext';
-import UploadSection from '../components/uploadsection/UploadSection';
-import RecentCritiques from '../components/recentcritiques/RecentCritiques';
+import Feedback from '../features/feedback/Feedback';
+import { ImageProvider } from '../store/FeedbackContext';
+import UploadSection from '../features/uploadsection/UploadSection';
+import RecentCritiques from '../features/recentcritiques/RecentCritiques';
 
 const HomePage: React.FC = () => {
   return (

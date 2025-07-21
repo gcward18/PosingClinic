@@ -1,4 +1,4 @@
-import LoginForm from "../components/forms/LoginForm";
+import LoginForm from "../features/login/LoginForm";
 import React, { useEffect } from "react";
 import { isAuthenticated } from "../utils/auth";
 import { useNavigate } from "react-router-dom";

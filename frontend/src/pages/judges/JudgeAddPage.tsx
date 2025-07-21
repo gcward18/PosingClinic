@@ -1,5 +1,5 @@
 import React from "react";
-import JudgeAddForm from "../../components/forms/judges/JudgeAddForm";
+import JudgeAddForm from "../../features/judges/JudgeAddForm";
 
 export default function JudgeAddPage() {
     // @ts-ignore

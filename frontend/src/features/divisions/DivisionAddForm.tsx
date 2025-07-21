@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import {EntityAPI} from '../../../apis/entity_apis'
+import { EntityAPI } from '../../apis/entity_apis';
 import React from 'react';
-import {Division} from "../../../types";
+import { Division } from '../../types';
 
 export default function DivisionAddForm() {
     const [name, setName] = useState('');
